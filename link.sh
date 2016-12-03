@@ -3,9 +3,9 @@
 # 各自追記
 # neovimの設定
 echo "Neovim link..."
-ln -sf ~/dotfiles/dein_lazy.toml ~/.config/dein_lazy.toml
-ln -sf ~/dotfiles/dein.toml ~/.config/dein.toml
-ln -sf ~/dotfiles/init.vim ~/.config/init.vim
+ln -sf ~/dotfiles/neovim/dein_lazy.toml ~/.config/nvim/dein_lazy.toml
+ln -sf ~/dotfiles/neovim/dein.toml ~/.config/nvim/dein.toml
+ln -sf ~/dotfiles/neovim/init.vim ~/.config/nvim/init.vim
 
 # preztoの設定
 echo "Prezto link..."
