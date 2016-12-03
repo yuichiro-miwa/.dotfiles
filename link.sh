@@ -9,8 +9,10 @@ ln -sf ~/dotfiles/neovim/init.vim ~/.config/nvim/init.vim
 
 # preztoの設定
 echo "Prezto link..."
+ln -sf ~/dotfiles/prezto ~/.prezto
 ln -sf ~/dotfiles/.zlogin ~/.zlogin
 ln -sf ~/dotfiles/.zlogout ~/.zlogout
 ln -sf ~/dotfiles/.zpreztorc ~/.zpreztorc
+ln -sf ~/dotfiles/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/.zshenv ~/.zshenv
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
