@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# スクリプト実行時に制御文以外でエラーが発生した場合に スクリプトを終了させる。
+set -e
+
 # Check for Homebrew,Install if we don't have it
 if test ! $(which brew); then
     echo "Installing homebrew..."
@@ -87,3 +90,6 @@ brew cask install ${apps[@]}
 # We need to link it
 brew cask alfred link
 
+# シェルをzshにする
+[ ${SHELL} != "/bin/zsh"  ] && chsh -s /bin/zsh
+echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"

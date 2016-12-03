@@ -1,8 +1,14 @@
 #!/bin/sh
 
-# neovim用のシェルスクリプト作成中
+# スクリプト実行時に制御文以外でエラーが発生した場合に スクリプトを終了させる。
+set -e
 
 echo "installing Neovim..."
 brew install neovim
 
+echo "Creation settings file..."
+touch $XDG_CONFIG_HOME/nvim/dein.toml
+touch $XDG_CONFIG_HOME/nvim/dein_lazy.toml
+touch $XDG_CONFIG_HOME/nvim/init.vim
 
+echo "Neovim complete!"
