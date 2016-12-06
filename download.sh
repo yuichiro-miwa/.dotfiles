@@ -5,8 +5,8 @@ set -e
 
 # 変数設定(各自の環境に合わせて設定)
 DOT_DIRECTORY="${HOME}/dotfiles"
-DOT_TARBALL="https://github.com/okamos/dotfiles/tarball/master"
-REMOTE_URL="git@github.com:okamos/dotfiles.git"
+DOT_TARBALL="https://github.com/yuichiro-miwa/dotfiles.git"
+REMOTE_URL="git@github.com:yuichiro-miwa/.dotfiles.git"
 
 # コマンド有無の確認用
 has() {
