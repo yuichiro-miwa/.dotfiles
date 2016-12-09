@@ -57,6 +57,8 @@ local -a desired_formulae=(
   'nkf'
   'tree'
   'wget'
+  'ctags'
+  'the_silver_searcher' # ag
 
   # Languages
   ### 'python3'     # For use in Neovim
