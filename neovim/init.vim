@@ -1,8 +1,15 @@
-" 行数
-set number
+"================================================
+"設定
+"================================================
 
+set number
+set title
 set noswapfile
 
+filetype indent on
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " insertモードから抜ける
 inoremap <silent> jj <ESC>
@@ -10,10 +17,18 @@ inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
-filetype indent on
-set tabstop=2
-set shiftwidth=2
-set expandtab
+" 検索設定
+set ignorecase "大文字/小文字の区別なく検索する
+set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
+set wrapscan "検索時に最後まで行ったら最初に戻る
+
+" その他の設定
+set hidden "複数ファイルの編集を可能にする
+set cursorline "カーソルラインを表示する
+
+"================================================
+"dein設定
+"================================================
 
 " プラグインがインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
@@ -52,14 +67,16 @@ if dein#check_install()
   call dein#install()
 endif
 
-"------------------------------------
-" neosnippet
-"------------------------------------
+
+"================================================
+"neosnippet設定
+"================================================
+
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
- 
+
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -67,7 +84,7 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
- 
+
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i

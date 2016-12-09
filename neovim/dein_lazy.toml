@@ -27,30 +27,52 @@ depends = ['neosnippet-snippets']
 on_i = 1
 on_ft = ['snippet']
 
-
 [[plugins]] # denite.nvim
 repo = 'Shougo/denite.nvim'
 depends = ['neomru.vim']
 on_event = 'BufRead'
 hook_add = '''
   nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+
+  # カレントディレクトリ以下のファイル
   nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
+
+  # ???
   nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-  nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+
+  # grep
+  nmap <silent> <C-u><C-g> :<C-u>Denite grep -buffer-name=search-buffer-denite<CR>
+
+  # grep検索結果の再表示
+  nmap <silent> <C-u><C-r> :<C-u>Denite -resume -buffer-name=search-buffer-denite<CR>
+
+  # カーソル配下にある言葉をターゲットにして:Deniteを実行
   nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+
+  # 最近開いたバッファ
   nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+
+  # ヤンクの履歴
   nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-  nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+
+  # 前回のDeniteバッファを再表示
+  # nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+
+  # -resumeした検索結果の次の行 or 前の行へ
   nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
   nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+
+
   nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
   nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 '''
+
+# denite設定 - ag
 hook_post_source = '''
   call denite#custom#var('file_rec', 'command',
-  \ ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+  \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
   call denite#custom#var('grep', 'command',
-  \ ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+  \ ['ag', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
   call denite#custom#var('grep', 'default_opts', [])
   call denite#custom#var('grep', 'recursive_opts', [])
 '''
