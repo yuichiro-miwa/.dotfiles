@@ -2,6 +2,20 @@
 repo = 'koron/codic-vim'
 on_cmd = 'Codic'
 
+# Markdown setting
+[[plugins]] # quote内のプログラムをシンタックスハイライトする
+repo = 'joker1007/vim-markdown-quote-syntax'
+on_ft = ['markdown','mkd']
+
+[[plugins]] # 編集中のMarkdownファイルのプレビューを作成する
+repo = 'kannokanno/previm'
+on_ft = ['markdown','mkd']
+
+[[plugins]]# プレビューをブラウザで開いてくれる
+repo = 'tyru/open-browser.vim'
+on_ft = ['markdown','mkd']
+# ここまで
+
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
 on_i = 1
@@ -33,36 +47,15 @@ depends = ['neomru.vim']
 on_event = 'BufRead'
 hook_add = '''
   nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
-
-  # カレントディレクトリ以下のファイル
   nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
-
-  # ???
   nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-
-  # grep
   nmap <silent> <C-u><C-g> :<C-u>Denite grep -buffer-name=search-buffer-denite<CR>
-
-  # grep検索結果の再表示
   nmap <silent> <C-u><C-r> :<C-u>Denite -resume -buffer-name=search-buffer-denite<CR>
-
-  # カーソル配下にある言葉をターゲットにして:Deniteを実行
   nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
-
-  # 最近開いたバッファ
   nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-
-  # ヤンクの履歴
   nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-
-  # 前回のDeniteバッファを再表示
-  # nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
-
-  # -resumeした検索結果の次の行 or 前の行へ
   nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
   nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
-
-
   nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
   nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 '''

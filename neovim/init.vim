@@ -90,3 +90,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+if expand("%:t") =~ ".*\.scss"
+    setlocal iskeyword+=$
+    setlocal iskeyword+=-
+endif
