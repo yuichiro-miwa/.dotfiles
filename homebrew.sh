@@ -56,6 +56,7 @@ local -a desired_formulae=(
   'curl'
   'nkf'
   'tree'
+  'lv'
   'wget'
   'ctags'
   'the_silver_searcher' # ag
