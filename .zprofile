@@ -25,7 +25,7 @@ fi
 ### cutom
 export EDITOR='nvim'
 export VISUAL='nvim'
-export PAGER='nvim'
+export PAGER='less'
 
 #
 # Language
