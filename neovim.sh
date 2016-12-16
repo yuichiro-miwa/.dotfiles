@@ -5,11 +5,13 @@
 set -e
 
 echo "installing Neovim..."
-brew install neovim
+brew install neovim/neovim/neovim
 brew install python3
 
 echo "installing Neovim(pip3)..."
 pip3 install --upgrade neovim
+
+export XDG_CONFIG_HOME=~./.config
 
 echo "Creation settings file..."
 touch $XDG_CONFIG_HOME/nvim/dein.toml
