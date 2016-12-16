@@ -26,6 +26,12 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 set hidden "複数ファイルの編集を可能にする
 set cursorline "カーソルラインを表示する
 
+" 矢印キーを無効化
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
 "================================================
 "dein設定
 "================================================
