@@ -40,3 +40,103 @@ if [ ! -d ${DOT_DIRECTORY} ]; then
 
   echo $(tput setaf 2)Download dotfiles complete!. ✔︎$(tput sgr0)
 fi
+
+cd ${DOT_DIRECTORY}
+source ./lib/homebrew
+source ./lib/neovim
+
+link_files() {
+
+    # 各自追記
+    # neovimの設定
+    echo "Neovim link..."
+    ln -sf ~/dotfiles/neovim/dein_lazy.toml ~/.config/nvim/dein_lazy.toml
+    ln -sf ~/dotfiles/neovim/dein.toml ~/.config/nvim/dein.toml
+    ln -sf ~/dotfiles/neovim/init.vim ~/.config/nvim/init.vim
+
+    # preztoの設定
+    echo "Prezto link..."
+    # ディレクトリへ
+    ln -nfs ~/dotfiles/prezto ~/.zprezto
+
+    # ファイルへ
+    ln -sf ~/dotfiles/.zlogin ~/.zlogin
+    ln -sf ~/dotfiles/.zlogout ~/.zlogout
+    ln -sf ~/dotfiles/.zpreztorc ~/.zpreztorc
+    ln -sf ~/dotfiles/.zprofile ~/.zprofile
+    ln -sf ~/dotfiles/.zshenv ~/.zshenv
+    ln -sf ~/dotfiles/.zshrc ~/.zshrc
+
+}
+
+
+initialize() {
+
+    # brewダウンドロード
+    run_brew
+
+    # Brewで入れたプログラム言語管理コマンドの初期処理
+    if has "rbenv"; then
+      # 最新のRubyを入れる
+      latest=`rbenv install --list | grep -v - | tail -n 1`
+      current=`rbenv versions | tail -n 1 | cut -d' ' -f 2`
+      if [ ${current} != ${latest} ]; then
+        rbenv install ${latest}
+        rbenv global ${latest}
+      fi
+    fi
+
+    # neovimのインストール
+    if has "nvim -v"; then
+        run_neovim
+    fi
+
+    # nodebrewのインストールと最新のnodeを導入
+    if has "nodebrew"; then
+       # Install latest node
+       current=`nodebrew ls | tail -n 1 | cut -d' ' -f 2`
+       if [ ${current} = "none"  ]; then
+         curl -sL git.io/nodebrew | perl - setup
+         nodebrew install-binary latest
+         nodebrew use latest
+       fi
+     fi
+
+    # preztoの導入
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+    setopt EXTENDED_GLOB
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    done
+
+    # シェルをzshにする
+    [ ${SHELL} != "/bin/zsh"  ] && chsh -s /bin/zsh
+    echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"
+}
+
+command=$1
+[ $# -gt 0 ] && shift
+
+case $command in
+  deploy)
+    link_files
+    ;;
+  init*)
+    initialize
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+exit 0
+
+
+
+
+
+
+
+
+

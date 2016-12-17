@@ -158,22 +158,3 @@ fi
 
 }
 
-# Brewタスクの実行
-run_brew
-
-# Brewで入れたプログラム言語管理コマンドの初期処理
-if has "rbenv"; then
-  # 最新のRubyを入れる
-  latest=`rbenv install --list | grep -v - | tail -n 1`
-  current=`rbenv versions | tail -n 1 | cut -d' ' -f 2`
-  if [ ${current} != ${latest} ]; then
-    rbenv install ${latest}
-    rbenv global ${latest}
-  fi
-fi
-
-# シェルをzshにする
-[ ${SHELL} != "/bin/zsh"  ] && chsh -s /bin/zsh
-echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"
-
-
