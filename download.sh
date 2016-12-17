@@ -103,12 +103,15 @@ initialize() {
      fi
 
     # preztoの導入
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
+    if [ ! -e $HOME/.prezto ]; then
+      # Install
+      git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+      # setup
+      setopt EXTENDED_GLOB
+      for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+      done
+    fi
 
     # シェルをzshにする
     [ ${SHELL} != "/bin/zsh"  ] && chsh -s /bin/zsh
