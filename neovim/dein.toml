@@ -59,5 +59,8 @@ on_ft = 'help'
 # [[plugins]] # ctrlp.vim
 # repo = 'ctrlpvim/ctrlp.vim'
 
+[[plugins]] # vim-stylefmt
+repo = 'kewah/vim-stylefmt'
+
 [[plugins]] # neosnippet-snippets
 repo = 'Shougo/neosnippet-snippets'

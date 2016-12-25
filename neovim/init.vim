@@ -78,6 +78,14 @@ endif
 "neosnippet設定
 "================================================
 
+nnoremap <silent> <leader>cs :Stylefmt<CR>
+vnoremap <silent> <leader>cs :StylefmtVisual<CR>
+
+
+"================================================
+"neosnippet設定
+"================================================
+
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
