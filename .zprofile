@@ -81,6 +81,7 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 
 
 ### alias
-
 alias vi='nvim'
 
+### gulp系alias
+alias gulp='nocorrect gulp'
