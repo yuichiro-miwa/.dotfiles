@@ -56,8 +56,9 @@ link_files() {
 
     # preztoの設定
     echo "Prezto link..."
-    # ディレクトリへ
-    ln -nfs ~/dotfiles/prezto ~/.zprezto
+    # zplugを導入したのでlnを変更
+    # ln -nfs ~/dotfiles/prezto ~/.zprezto
+    ln -s $HOME/.zplug/repos/sorin-ionescu/prezto $HOME/.zprezto
 
     # ファイルへ
     ln -sf ~/dotfiles/.zlogin ~/.zlogin
@@ -102,15 +103,10 @@ initialize() {
        fi
      fi
 
-    # preztoの導入
-    if [ ! -e $HOME/.prezto ]; then
+    # zplugの導入
+    if [ ! -e $HOME/.zplug ]; then
       # Install
-      git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-      # setup
-      setopt EXTENDED_GLOB
-      for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-      done
+      curl -sL zplug.sh/installer | zsh
     fi
 
     # シェルをzshにする
