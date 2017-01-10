@@ -8,6 +8,6 @@
 # Print the message.
 cat <<-EOF
 
-Thank you. Come again!
--- Today is $(date)
+今日も1日気合い入れていきましょう!
+-- 今日は $(date)
 EOF

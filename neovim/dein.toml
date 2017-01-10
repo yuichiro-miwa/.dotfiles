@@ -22,6 +22,11 @@ hook_add = '''
   \ }
 '''
 
+# Syntax check
+
+[[plugins]]
+repo = 'neomake/neomake'
+
 # Colors
 
 [[plugins]] # hybrid
@@ -39,6 +44,22 @@ on_ft = 'html'
 [[plugins]] # css3
 repo = 'hail2u/vim-css3-syntax'
 on_ft = 'css'
+
+[[plugins]] # vim-coloresque
+repo = 'gko/vim-coloresque'
+on_ft = 'css'
+
+[[plugins]] # yajs.vim
+repo = 'othree/yajs.vim'
+on_ft = 'js'
+
+[[plugins]] # ESlint
+repo = 'benjie/neomake-local-eslint.vim'
+on_ft = 'js'
+
+[[plugins]] # vim-json
+repo = 'elzr/vim-json'
+on_ft = 'json'
 
 [[plugins]] # Toml
 repo  = 'cespare/vim-toml'
@@ -58,6 +79,9 @@ on_ft = 'help'
 
 # [[plugins]] # ctrlp.vim
 # repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]] # nerdtree
+repo = 'scrooloose/nerdtree'
 
 [[plugins]] # vim-stylefmt
 repo = 'kewah/vim-stylefmt'

@@ -7,7 +7,7 @@ set title
 set noswapfile
 
 filetype indent on
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set expandtab
 
@@ -25,6 +25,9 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 " その他の設定
 set hidden "複数ファイルの編集を可能にする
 set cursorline "カーソルラインを表示する
+
+":findのPATH指定
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " 矢印キーを無効化
 noremap <Up> <Nop>
@@ -108,3 +111,34 @@ if expand("%:t") =~ ".*\.scss"
     setlocal iskeyword+=$
     setlocal iskeyword+=-
 endif
+
+"================================================
+"NERDTree設定
+"================================================
+
+"ファイルを指定してviを起動した際はNERDTreeを開かない
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+map <C-n> :NERDTreeToggle<CR>
+
+"================================================
+"linter setting
+"================================================
+
+autocmd! BufWritePost * Neomake " 保存時に実行する
+
+" edlint setting
+let g:neomake_javascript_enabled_makers = ['xo']
+
+" stylelint setting
+let g:syntastic_css_checkers = ['stylelint']
+let g:syntastic_scss_checkers = ['stylelint']
+
+" error & warn settingj
+let g:neomake_error_sign = {'text': '>>', 'texthl': 'WarningMsg'}
+let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Question'}
+
+
+
+

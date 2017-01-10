@@ -55,6 +55,8 @@ if has "brew"; then
     'wget'
     'ctags'
     'the_silver_searcher' # ag
+    'tmux',
+    'reattach-to-user-namespace'
 
     # Languages
     ### 'python3'     # For use in Neovim

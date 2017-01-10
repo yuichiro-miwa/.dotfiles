@@ -22,17 +22,43 @@ eval "$(rbenv init - zsh)"
 ### gulpコマンドのpathを通す
 export PATH=$PATH:./node_modules/.bin
 
+############################################################ 以下iterm関連
+
+case ${OSTYPE} in
+  darwin*)
+    function tp() {
+      if [ $# -ne 1 ] ; then
+        echo "    invalid argument."
+        echo "    use 0 - 9"
+      else
+        echo "
+          tell application \"iTerm\"
+            activate -- make window active
+            tell current session of current window
+              set transparency to $1/10
+            end tell
+          end tell
+        " | /usr/bin/osascript -
+      fi
+    }
+    ;;
+esac
+
 ############################################################ 以下zplug関連
 
 source ~/.zplug/init.zsh
 
+# プラグイン系
 # prezto
 zplug "sorin-ionescu/prezto"
+
+# zsh-syntax-highlighting
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
 
-# tmux関連
+############################################################ 以下 tmux関連
 
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
