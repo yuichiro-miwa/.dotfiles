@@ -2,6 +2,7 @@
 "設定
 "================================================
 
+
 set number
 set title
 set noswapfile
@@ -34,6 +35,9 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+" python3へのpath
+let g:python3_host_prog = $PYENV_ROOT . '/usr/local/bin/python3'
 
 "================================================
 "dein設定
@@ -78,7 +82,7 @@ endif
 
 
 "================================================
-"neosnippet設定
+"stylefmt設定
 "================================================
 
 nnoremap <silent> <leader>cs :Stylefmt<CR>
@@ -112,6 +116,10 @@ if expand("%:t") =~ ".*\.scss"
     setlocal iskeyword+=-
 endif
 
+if expand("%:t") =~ ".*\.css"
+    setlocal iskeyword+=-
+endif
+
 "================================================
 "NERDTree設定
 "================================================
@@ -132,13 +140,12 @@ autocmd! BufWritePost * Neomake " 保存時に実行する
 let g:neomake_javascript_enabled_makers = ['xo']
 
 " stylelint setting
-let g:syntastic_css_checkers = ['stylelint']
+let g:syntastic_css_checkers = ['stylefmt']
 let g:syntastic_scss_checkers = ['stylelint']
 
 " error & warn settingj
 let g:neomake_error_sign = {'text': '>>', 'texthl': 'WarningMsg'}
 let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Question'}
-
 
 
 
