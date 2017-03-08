@@ -43,7 +43,6 @@ on_ft = ['snippet']
 
 [[plugins]] # denite.nvim
 repo = 'Shougo/denite.nvim'
-depends = ['neomru.vim']
 on_event = 'BufRead'
 hook_add = '''
   nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>

@@ -2,7 +2,6 @@
 "設定
 "================================================
 
-
 set number
 set title
 set noswapfile
@@ -141,11 +140,19 @@ let g:neomake_javascript_enabled_makers = ['xo']
 
 " stylelint setting
 let g:syntastic_css_checkers = ['stylefmt']
-let g:syntastic_scss_checkers = ['stylelint']
+let g:syntastic_scss_checkers = ['stylefmt']
 
 " error & warn settingj
 let g:neomake_error_sign = {'text': '>>', 'texthl': 'WarningMsg'}
 let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Question'}
 
 
+" colorschemeの設定
+set background=dark
+colorscheme solarized
 
+" vim-easy-alignの設定
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
