@@ -12,15 +12,59 @@ fi
 
 # Customize to your needs...
 
+### エディタをneovimに設定
+export EDITOR=neovim
+
+### 文字コードをUTF-8に設定
+export LANG=ja_JP.UTF-8
+
+### KCODEにUTF-8を設定
+export KCODE=u
+
+# autotestでfeatureを動かす
+export AUTOFEATURE=true
+
+### キーバインドをvimモードに設定
+bindkey -v
+
 ### node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 ### rbenv
-export RBENV_ROOT=/usr/local/var/rbenv
-eval "$(rbenv init - zsh)"
+### export RBENV_ROOT=/usr/local/var/rbenv
+### eval "$(rbenv init - zsh)"
+
+### anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
 
 ### gulpコマンドのpathを通す
 export PATH=$PATH:./node_modules/.bin
+
+### color設定
+TERM=xterm-256color
+autoload colors
+colors
+PROMPT="%{$fg[green]%}[%n]%(!.#.$) %{$reset_color%}"
+PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
+SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
+RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
+
+############################################################ 以下zshプロンプトにモード表示
+
+function zle-line-init zle-keymap-select {
+  case $KEYMAP in
+    vicmd)
+    PROMPT="%{$fg[cyan]%}[%[cyan]%n/%{$fg_bold[blue]%}NOR%{$reset_color%}%{$fg[cyan]%}]%#%{$reset_color%} "
+    ;;
+    main|viins)
+    PROMPT="%{$fg[blue]%}[%[blue]%n/%{$fg_bold[cyan]%}INS%{$reset_color%}%{$fg[blue]%}]%#%{$reset_color%} "
+    ;;
+  esac
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 ############################################################ 以下iterm関連
 
@@ -54,6 +98,20 @@ zplug "sorin-ionescu/prezto"
 
 # zsh-syntax-highlighting
 zplug "zsh-users/zsh-syntax-highlighting"
+
+# zsh-users/zsh-autosuggestions
+zplug "zsh-users/zsh-autosuggestions"
+
+# zsh-users/zsh-completions
+zplug "zsh-users/zsh-completions"
+
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:"*darwin*amd64*"
+
+zplug "b4b4r07/enhancd", use:init.sh
 
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose

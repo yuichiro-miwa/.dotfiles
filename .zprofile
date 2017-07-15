@@ -79,9 +79,19 @@ fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
 
+###スクリーンセイバーalias
+alias SS='open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app'
 
 ### alias
 alias vi='nvim'
 
 ### gulp系alias
 alias gulp='nocorrect gulp'
+
+###git系alias
+alias gs='git status'
+alias gss='git status -s'
+alias ga='git add'
+alias gc='git commit -m'
+
+

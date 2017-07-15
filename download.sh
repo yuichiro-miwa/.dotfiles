@@ -43,6 +43,7 @@ fi
 
 cd ${DOT_DIRECTORY}
 source ./lib/homebrew
+source ./lib/anyenv
 source ./lib/neovim
 
 link_files() {
@@ -76,8 +77,31 @@ initialize() {
     # brewダウンドロード
     run_brew
 
-    # Brewで入れたプログラム言語管理コマンドの初期処理
+    # anyenvダウンドロード
+    run_anyenv
+
+    # envで入れたプログラム言語管理コマンドの初期処理
     if has "rbenv"; then
+      # 最新のRubyを入れる
+      latest=`rbenv install --list | grep -v - | tail -n 1`
+      current=`rbenv versions | tail -n 1 | cut -d' ' -f 2`
+      if [ ${current} != ${latest} ]; then
+        rbenv install ${latest}
+        rbenv global ${latest}
+      fi
+    fi
+
+    if has "ndenv"; then
+      # 最新のRubyを入れる
+      latest=`rbenv install --list | grep -v - | tail -n 1`
+      current=`rbenv versions | tail -n 1 | cut -d' ' -f 2`
+      if [ ${current} != ${latest} ]; then
+        rbenv install ${latest}
+        rbenv global ${latest}
+      fi
+    fi
+
+    if has "pyenv"; then
       # 最新のRubyを入れる
       latest=`rbenv install --list | grep -v - | tail -n 1`
       current=`rbenv versions | tail -n 1 | cut -d' ' -f 2`
@@ -91,17 +115,6 @@ initialize() {
     if has "nvim -v"; then
         run_neovim
     fi
-
-    # nodebrewのインストールと最新のnodeを導入
-    if has "nodebrew"; then
-       # Install latest node
-       current=`nodebrew ls | tail -n 1 | cut -d' ' -f 2`
-       if [ ${current} = "none"  ]; then
-         curl -sL git.io/nodebrew | perl - setup
-         nodebrew install-binary latest
-         nodebrew use latest
-       fi
-     fi
 
     # zplugの導入
     if [ ! -e $HOME/.zplug ]; then

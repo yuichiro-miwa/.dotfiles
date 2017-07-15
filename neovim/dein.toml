@@ -12,14 +12,14 @@ on_event = 'TextYankPost'
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
-      \ 'colorscheme': 'solarized'
+          \'colorscheme': 'solarized',
       \ }
 '''
 
-# Syntax check
+# プラグイン
 
 [[plugins]]
-repo = 'neomake/neomake'
+repo = 'w0rp/ale'
 
 # Colors
 
@@ -42,6 +42,11 @@ repo = 'junegunn/vim-easy-align'
 [[plugins]] # lexima
 repo = 'cohama/lexima.vim'
 
+# editorconfigの設定
+
+[[plugins]] # editorconfig
+repo = 'editorconfig/editorconfig-vim'
+
 # Lang
 
 [[plugins]] # Html5
@@ -54,17 +59,19 @@ on_ft = 'html'
 
 [[plugins]] # css
 repo = 'JulesWang/css.vim' # only necessary if your Vim version < 7.4
+on_ft = ['scss', 'css']
 
 [[plugins]] # Scss
 repo = 'cakebaker/scss-syntax.vim'
-
-[[plugins]] # vue
-repo = 'posva/vim-vue'
-on_ft = 'vue'
+on_ft = 'scss'
 
 [[plugins]] # vim-coloresque
 repo = 'gko/vim-coloresque'
 on_ft = 'css'
+
+[[plugins]] # vue
+repo = 'posva/vim-vue'
+on_ft = 'vue'
 
 [[plugins]] # yajs.vim
 repo = 'othree/yajs.vim'
@@ -93,9 +100,6 @@ hook_add = '''
 [[plugins]] # Japanese doc
 repo = 'vim-jp/vimdoc-ja'
 on_ft = 'help'
-
-# [[plugins]] # ctrlp.vim
-# repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]] # nerdtree
 repo = 'scrooloose/nerdtree'

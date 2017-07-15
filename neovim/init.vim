@@ -1,7 +1,6 @@
 "================================================
 "設定
 "================================================
-
 set number
 set title
 set noswapfile
@@ -10,6 +9,7 @@ filetype indent on
 set tabstop=4
 set shiftwidth=2
 set expandtab
+set list
 
 " insertモードから抜ける
 inoremap <silent> jj <ESC>
@@ -34,6 +34,9 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+" neovim - terminarl setting
+tnoremap <silent> <ESC> <C-\><C-n>
 
 " python3へのpath
 let g:python3_host_prog = $PYENV_ROOT . '/usr/local/bin/python3'
@@ -133,18 +136,18 @@ map <C-n> :NERDTreeToggle<CR>
 "linter setting
 "================================================
 
-autocmd! BufWritePost * Neomake " 保存時に実行する
+"autocmd! BufWritePost * Neomake " 保存時に実行する
 
 " edlint setting
-let g:neomake_javascript_enabled_makers = ['xo']
+"let g:neomake_javascript_enabled_makers = ['xo']
 
 " stylelint setting
-let g:syntastic_css_checkers = ['stylefmt']
-let g:syntastic_scss_checkers = ['stylefmt']
+"let g:syntastic_css_checkers = ['stylefmt']
+"let g:syntastic_scss_checkers = ['stylefmt']
 
 " error & warn settingj
-let g:neomake_error_sign = {'text': '>>', 'texthl': 'WarningMsg'}
-let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Question'}
+"let g:neomake_error_sign = {'text': '>>', 'texthl': 'WarningMsg'}
+"let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Question'}
 
 
 " colorschemeの設定
@@ -156,3 +159,53 @@ colorscheme solarized
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+"================================================
+"Endtagcomment setting
+"================================================
+
+function! Endtagcomment()
+    let reg_save = @@
+
+    try
+        silent normal vaty
+    catch
+        execute "normal \<Esc>"
+        echohl ErrorMsg
+        echo 'no match html tags'
+        echohl None
+        return
+    endtry
+
+    let html = @@
+
+    let start_tag = matchstr(html, '\v(\<.{-}\>)')
+    let tag_name  = matchstr(start_tag, '\v([a-zA-Z]+)')
+
+    let id = ''
+    let id_match = matchlist(start_tag, '\vid\=["'']([^"'']+)["'']')
+    if exists('id_match[1]')
+        let id = '#' . id_match[1]
+    endif
+
+    let class = ''
+    let class_match = matchlist(start_tag, '\vclass\=["'']([^"'']+)["'']')
+    if exists('class_match[1]')
+        let class = '.' . join(split(class_match[1], '\v\s+'), '.')
+    endif
+
+    execute "normal `>va<\<Esc>`<"
+
+    let comment = g:endtagcommentFormat
+    let comment = substitute(comment, '%tag_name', tag_name, 'g')
+    let comment = substitute(comment, '%id', id, 'g')
+    let comment = substitute(comment, '%class', class, 'g')
+    let @@ = comment
+
+    normal ""P
+
+    let @@ = reg_save
+endfunction
+
+let g:endtagcommentFormat = '<!-- /%tag_name%id%class -->'
+nnoremap ,t :<C-u>call Endtagcomment()<CR>

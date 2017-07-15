@@ -40,6 +40,7 @@ if has "brew"; then
     # Git
     'git'
     'tig'
+    'gibo'
 
     # Database
     'redis'
@@ -58,10 +59,6 @@ if has "brew"; then
     'tmux',
     'reattach-to-user-namespace'
 
-    # Languages
-    ### 'python3'     # For use in Neovim
-    'rbenv'       # For use in Ruby
-    'ruby-build'  # For use in Ruby
   )
 
   local installed=`brew list`
@@ -99,37 +96,39 @@ if has "brew"; then
     # Browser
     'firefox'
     'google-chrome'
-    'blisk'
-    'vivaldi'
 
     # Communication
     'slack'
     'skype'
+    'microsoft-teams'
 
     # VM
     'virtualbox'
     'vagrant'
 
+    # ftp
+    'transmit'
+
+    # edit
+    'atom'
+    'mi'
+
     # etc ...
     'appcleaner'
-    'atom'
-    'sublime-text'
-    'brackets'
-    'mi'
     'genymotion'
     'dropbox'
     'evernote'
-     ### 'google-drive'
     'sketch'
     'screaming-frog-seo-spider '
-    'franz'
+    'kindle'
+    '1password'
 
     # development
     'iterm2'
-    'sourcetree'
     'sequel-pro'
 
     'licecap'
+
   )
   # cask
   local installed=`brew cask list`

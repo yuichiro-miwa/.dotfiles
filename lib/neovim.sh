@@ -8,7 +8,6 @@ run_neovim(){
 
     echo "installing Neovim..."
     brew install neovim/neovim/neovim
-    brew install python3
 
     echo "installing Neovim(pip3)..."
     pip3 install --upgrade neovim
