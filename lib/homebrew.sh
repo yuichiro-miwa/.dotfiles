@@ -44,6 +44,11 @@ if has "brew"; then
 
     # Database
     'redis'
+    'mongodb'
+
+    # img
+    'pngquant'
+    'jpegoptim'
 
     # Utils
     'openssl'
