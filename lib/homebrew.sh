@@ -96,37 +96,31 @@ if has "brew"; then
   local -a missing_formulae=()
   local -a desired_formulae=(
     # Launcher
-    'alfred'
+    # 'alfred'
 
     # Browser
-    'firefox'
-    'google-chrome'
+    # 'firefox'
+    # 'google-chrome'
 
     # Communication
-    'slack'
-    'skype'
-    'microsoft-teams'
+    # 'slack'
+    # 'skype'
 
     # VM
     'virtualbox'
     'vagrant'
 
     # ftp
-    'transmit'
 
     # edit
-    'atom'
     'mi'
 
     # etc ...
     'appcleaner'
     'genymotion'
-    'dropbox'
-    'evernote'
-    'sketch'
-    'screaming-frog-seo-spider '
-    'kindle'
-    '1password'
+    # 'evernote'
+    # 'sketch'
+    # '1password'
 
     # development
     'iterm2'
